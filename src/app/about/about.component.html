@@ -1,11 +1,12 @@
 <div class="container mat-typography" fxFill fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="3%">
-  <mat-card fxLayout="row" fxFill fxFlex="15" class="div-titulo mat-elevation-z2">
-    <h1 class="titulo">Opciones</h1>
-  </mat-card>
+  <h1 class="titulo">Opciones</h1>
 
-  <mat-card class="card">
+  <mat-card
+    class="card"
+    style="display:inline-flex;align-items: center;justify-content: center;vertical-align: middle;"
+  >
+    <label class="h1">Sonido</label>
     <div>
-      <label class="h1">Sonido:</label>
       <button mat-raised-button *ngIf="isOn" [color]="'success'" class="boton" (click)="state1()">
         <mat-icon>volume_up</mat-icon>
         Activado
@@ -14,17 +15,17 @@
         <mat-icon>volume_off</mat-icon>
         Desactivado
       </button>
-      <!--         <br />
-        <br />
-        <mat-divider></mat-divider>
-        <br /> -->
     </div>
   </mat-card>
 
-  <mat-card class="card">
+  <mat-card
+    class="card"
+    style="display:inline-flex;align-items: center;justify-content: center;vertical-align: middle;"
+  >
     <div>
       <button mat-raised-button color="primary" routerLink="/opciones" routerLinkActive="active">
-        <span class="h1" translate>Configurar colores del temporizador</span>
+        <mat-icon style="font-size: 24px;">settings</mat-icon>
+        <span class="h1" translate>colores del temporizador</span>
       </button>
       <!--       <br />
         <br />
@@ -32,7 +33,10 @@
     </div>
   </mat-card>
 
-  <mat-card class="card">
+  <mat-card
+    class="card"
+    style="display:inline-flex;align-items: center;justify-content: center;vertical-align: middle;"
+  >
     <div>
       <button mat-raised-button color="accent" routerLink="/home" routerLinkActive="active">
         <mat-icon>menu_book</mat-icon> <span class="h1" translate>&nbsp;&nbsp;GUÍA</span>

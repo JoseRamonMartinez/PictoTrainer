@@ -27,7 +27,7 @@ export class BibliotecaComponent implements OnInit {
 
   secuenciaBuscada: Secuencia[] = [];
   buscador: boolean;
-
+  panelOpenState = false;
   palabraBuscar: string;
 
   constructor(

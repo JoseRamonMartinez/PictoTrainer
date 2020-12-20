@@ -13,7 +13,6 @@
 .brand {
   color: mat-color($app-primary, "default-contrast");
   text-decoration: none;
-  padding-right: 1rem;
 }
 
 .menu-button {
@@ -21,11 +20,9 @@
 }
 
 .menu {
-  font-size: 4vmin;
   font-family: "Luckiest Guy", cursive;
 }
 .icon {
-  font-size: 3vmin;
 }
 
 .mat-black {

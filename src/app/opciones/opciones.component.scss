@@ -10,7 +10,7 @@
 h1 {
   font-family: "Luckiest Guy", cursive;
   color: #fff;
-  font-size: xxx-large;
+  font-size: x-large;
 }
 .subt {
   font-family: "Luckiest Guy", cursive;
@@ -22,9 +22,25 @@ h1 {
   color: #fff;
 }
 
+.tempo-titulo {
+  font-size: xxx-large;
+}
+
+@media screen and (max-width: 420px), screen and (max-height: 500px) {
+  .tempo-titulo {
+    font-size: xx-large;
+  }
+  .boton-guardar {
+    font-family: "Luckiest Guy", cursive;
+    font-size: 16px;
+  }
+  .color-title {
+    padding-top: 40px;
+  }
+}
+
 .boton-guardar {
   font-family: "Luckiest Guy", cursive;
   margin: 20px;
-  height: 120%;
-  width: 240px;
+  font-size: 26px;
 }

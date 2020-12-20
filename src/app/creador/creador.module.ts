@@ -8,7 +8,7 @@ import { SharedModule } from '@app/shared';
 import { MaterialModule } from '@app/material.module';
 import { CreadorRoutingModule } from './creador-routing.module';
 import { CreadorComponent } from './creador.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImageUploadModule } from 'angular2-image-upload';
 
 @NgModule({
@@ -19,9 +19,9 @@ import { ImageUploadModule } from 'angular2-image-upload';
     SharedModule,
     FlexLayoutModule,
     MaterialModule,
-
     CreadorRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     ImageUploadModule.forRoot()
   ],
   declarations: [CreadorComponent]

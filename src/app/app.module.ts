@@ -39,7 +39,7 @@ import { ProgresoModule } from './progreso/progreso.module';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { LoadBarComponent } from './play/loadBar/loadBar.component';
 import { FinDialogComponent } from './play/finDialog/finDialog.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   imports: [
     BrowserModule,
@@ -51,9 +51,8 @@ import { FinDialogComponent } from './play/finDialog/finDialog.component';
     MaterialModule,
 
     DragDropModule,
-
+    ReactiveFormsModule,
     HighchartsChartModule,
-
     CoreModule,
     SharedModule,
     ShellModule,

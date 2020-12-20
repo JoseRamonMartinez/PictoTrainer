@@ -8,7 +8,6 @@
 .div-titulo {
   background-color: rgb(132, 185, 255);
   /* background-color: rgba(175, 175, 175, 0.705); */
-  padding: 3vmin;
   padding-bottom: 0;
 }
 h1,
@@ -16,60 +15,54 @@ h1,
 .boton-flecha {
   font-family: "Luckiest Guy", cursive;
 }
+
 .titulo {
   font-size: xxx-large;
   padding-top: 1%;
   color: #000;
 }
+@media screen and (max-width: 400px), screen and (max-height: 500px) {
+  .titulo {
+    font-size: xx-large;
+    padding-top: 7%;
+    color: #000;
+  }
+}
 .acciones {
-  padding-left: 20px;
+  padding-left: 0px;
 }
 .div-cards {
-  padding-bottom: 50px;
   width: 100%;
   height: 100%;
 }
 
 .card {
   background-color: #f5bd8f;
-  width: 165vmin;
-  height: 2vmin;
   overflow-x: auto;
   overflow-y: hidden;
-  margin-bottom: 3vmin;
 }
 .card-title {
-  font-size: 5vmin;
 }
 .card-text {
-  font-size: 3vmin;
-  width: fit-content;
-  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 0%;
+  font-family: "Luckiest Guy", cursive;
+  color: #000;
+  font-size: large;
 }
 .icon-card {
-  height: 15vmin;
-  width: 15vmin;
   cursor: pointer;
+  width: 70%;
 }
 
 .icon-imagen {
-  width: 14vmin;
-  height: 12.5vmin;
 }
 .boton {
-  margin-right: 2vmin;
-  margin-left: 1vmin;
-  margin-top: 2vmin;
-  margin-bottom: 2vmin;
-  height: 9vmin;
-  width: 15vmin;
 }
 
 .boton-play {
-  margin-left: 6vmin;
-
-  font-size: 10vmin;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -82,8 +75,9 @@ h1,
 }
 .boton-crear {
   font-family: "Luckiest Guy", cursive;
-
-  font-size: 5vmin;
+}
+mat-grid-tile {
+  margin-right: 0px;
 }
 
 .boton-buscar {

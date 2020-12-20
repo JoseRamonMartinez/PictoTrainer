@@ -1,14 +1,25 @@
-<div class="container mat-typography" fxFill fxLayout="row" fxLayoutAlign="center center">
-  <div fxLayout="column" fxLayoutAlign="center center" fxFlex="50" fxFill class="left-div">
-    <mat-card fxLayout="row" fxFill fxFlex="10" class="div-titulo mat-elevation-z2">
-      <h1 class="titulo">TAREA:</h1>
-      &nbsp;&nbsp;&nbsp;
-      <mat-form-field>
-        <mat-label class="input">Introduce un nombre</mat-label>
-        <input matInput [(ngModel)]="nombreSecuencia" />
-      </mat-form-field>
-    </mat-card>
-    <!--  <div fxLayout="row" fxLayoutAlign="center center" fxFlex="20">
+<div class="container mat-typography" fxFill fxLayout="column" fxLayoutAlign="center center">
+  <div fxLayout="column" fxFlex="50" fxFill>
+    <mat-form-field appearance="outline" class="example-form-field">
+      <mat-label class="input">Nombre de la tarea</mat-label>
+      <input clearInput matInput [(ngModel)]="nombreSecuencia" />
+    </mat-form-field>
+
+    <mat-accordion class="example-headers-align" multi>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header class="card">
+          <mat-panel-title class="card" style="margin-top: 10px;">
+            <mat-icon style=" color:whitesmoke;margin-top: 5px;">add_circle_outline</mat-icon>
+            <h1
+              style=" color:whitesmoke;display: flex;
+    align-items: left;"
+            >
+              Agregar Actividades
+            </h1>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <!--  <div fxLayout="row" fxLayoutAlign="center center" fxFlex="20">
       <h1 class="titulo">TAREA:</h1>
       &nbsp;&nbsp;&nbsp;
       <mat-form-field>
@@ -17,8 +28,70 @@
       </mat-form-field>
     </div> -->
 
-    <div class="bottom-div" fxLayout="column" fxLayoutAlign="end" fxFlex="80" fxLayoutGap="4%" class="right-div">
-      <div class="bottom-div-card" fxLayout="row" fxLayoutAlign="center center">
+        <mat-tab-group mat-stretch-tabs dynamicHeight>
+          <mat-tab label="Buscar pictograma">
+            <mat-grid-list cols="2" rowHeight="2:1">
+              <div fxLayout="row" fxFill>
+                <mat-form-field class="input-buscar">
+                  <mat-label class="input">Busca una palabra</mat-label>
+                  <input matInput [(ngModel)]="palabraBuscar" />
+                </mat-form-field>
+                <button mat-raised-button color="primary" (click)="buscar(palabraBuscar)" class="boton-buscar">
+                  <mat-icon>search</mat-icon>
+                </button>
+              </div>
+              <mat-card (click)="seleccionarPicto(busqueda)" *ngIf="found == 2">
+                <img mat-card-image style="    max-width:128px;" src="{{ busqueda.src }}" />
+                <mat-card-subtitle>{{ busqueda.nombre }}</mat-card-subtitle>
+              </mat-card>
+              <h4 *ngIf="found == 1">No encontrado</h4>
+            </mat-grid-list>
+          </mat-tab>
+          <mat-tab label="Subir pictograma">
+            <div *ngIf="uploadFileMode">
+              <img [src]="imageSrc" style="max-width:300px;max-height:300px" />
+              <input name="imageUrl" type="file" accept="image/*" (change)="onFileSelected($event)" />
+              <mat-form-field>
+                <input matInput required placeholder="Nombre de la imagen" [(ngModel)]="nombreImagen" />
+              </mat-form-field>
+              <div fxLayout="row">
+                <button class="boton-guardar-imagen" mat-raised-button [color]="'primary'" (click)="cargarImagen()">
+                  Cancelar
+                </button>
+                <button
+                  class="boton-guardar-imagen"
+                  mat-raised-button
+                  [color]="'success'"
+                  [disabled]="!nombreImagen || nombreImagen == ''"
+                  (click)="sendImage()"
+                >
+                  Guardar imagen
+                </button>
+              </div>
+            </div>
+            <div *ngIf="!uploadFileMode">
+              <button class="boton-cargar-imagen" mat-raised-button [color]="'primary'" (click)="cargarImagen()">
+                Cargar imagen
+              </button>
+            </div>
+
+            <mat-grid-list cols="2" rowHeight="1:1" gutterSize="10px">
+              <mat-card *ngFor="let im of imagenesPropias" class="card" (click)="seleccionarPicto(im)">
+                <img mat-card-image [src]="this.sanitizer.bypassSecurityTrustResourceUrl(im.src)" />
+                <mat-card-subtitle>{{ im.nombre }}</mat-card-subtitle>
+              </mat-card>
+            </mat-grid-list>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <div>
+      <div
+        style=" display: flex;
+      align-items: center;  justify-content: center;
+     "
+      >
         <!--  <mat-card class="card" *ngFor="let res of listaAcciones" fxFlex="{{100/listaAcciones.length}}" >
           <img mat-card-image src="../../assets/pictos/{{res.src}}">
           <mat-card-subtitle>{{res.nombre}}</mat-card-subtitle>
@@ -33,6 +106,7 @@
         >
           &lt;
         </button>
+
         <mat-card class="selected-card" fxFlex="40" *ngIf="selected">
           <img mat-card-image src="{{ selected.src }}" class="card-imagen" />
           <!--  <mat-card-subtitle>Pictograma: {{pictos[0].nombre}}</mat-card-subtitle><br>
@@ -61,10 +135,10 @@
       </div>
       <br />
 
-      <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="50px">
+      <div style="padding-bottom: 23px;" fxLayout="row" fxLayoutAlign="center" fxLayoutGap="50px">
         <button
-          class="mat-display-2 boton"
           mat-raised-button
+          style="font-size: 24px; font-family: 'Luckiest Guy', cursive;"
           [color]="'warn'"
           routerLink="/biblioteca"
           routerLinkActive="active"
@@ -72,8 +146,8 @@
           CANCELAR
         </button>
         <button
-          class="mat-display-2 boton"
           mat-raised-button
+          style="font-size: 24px;font-family: 'Luckiest Guy', cursive;"
           [color]="'success'"
           (click)="guardar()"
           [disabled]="!nombreSecuencia || !(listaAcciones.length > 0)"
@@ -85,92 +159,5 @@
       </div>
     </div>
   </div>
-
-  <div fxLayout="column" fxLayoutAlign="start end" fxFlex="50" fxFill>
-    <h1>Agrega Actividades</h1>
-    <mat-tab-group
-      backgroundColor="accent"
-      style="height: calc(100% - 100px); min-height: calc(100% - 100px); min-width: 50%; width: 80%; margin: 0px;"
-      ><!-- class="mat-elevation-z1" -->
-
-      <mat-tab label="Pictogramas">
-        <mat-grid-list cols="2" rowHeight="1:1" gutterSize="10px">
-          <div fxLayout="row" fxFill>
-            <!-- <form class="example-form"> -->
-            <!--  <mat-form-field class="example-full-width">
-                <mat-label>Buscar</mat-label>
-                <input matInput placeholder="Buscar" [(ngModel)]="palabraBuscar"/>
-              </mat-form-field> -->
-            <mat-form-field class="input-buscar">
-              <mat-label class="input">Busca una palabra</mat-label>
-              <input matInput [(ngModel)]="palabraBuscar" />
-            </mat-form-field>
-            <button mat-raised-button color="primary" (click)="buscar(palabraBuscar)" class="boton-buscar">
-              <mat-icon>search</mat-icon>
-            </button>
-            <!--  </form> -->
-            <app-loader class="inline-loader" [isLoading]="isLoading" [size]="0.5" [width]="0.5"></app-loader>
-          </div>
-
-          <!--  <mat-grid-tile>
-            <div fxLayout="column" fxFlex="70">
-              <img mat-card-image src="../../assets/pictos/test.PNG">
-              Texto
-            </div>
-          </mat-grid-tile> -->
-          <!--  <mat-grid-tile *ngIf="busqueda"> -->
-          <mat-card class="card" (click)="seleccionarPicto(busqueda)" *ngIf="found == 2">
-            <img mat-card-image src="{{ busqueda.src }}" />
-            <mat-card-subtitle>{{ busqueda.nombre }}</mat-card-subtitle>
-          </mat-card>
-          <h4 *ngIf="found == 1">No encontrado</h4>
-        </mat-grid-list>
-      </mat-tab>
-      <mat-tab label="Mis imágenes">
-        <div *ngIf="uploadFileMode">
-          <img [src]="imageSrc" style="max-width:300px;max-height:300px" />
-          <input name="imageUrl" type="file" accept="image/*" (change)="onFileSelected($event)" />
-          <mat-form-field>
-            <input matInput required placeholder="Nombre de la imagen" [(ngModel)]="nombreImagen" />
-          </mat-form-field>
-          <div fxLayout="row">
-            <button class="boton-guardar-imagen" mat-raised-button [color]="'primary'" (click)="cargarImagen()">
-              Cancelar
-            </button>
-            <button
-              class="boton-guardar-imagen"
-              mat-raised-button
-              [color]="'success'"
-              [disabled]="!nombreImagen || nombreImagen == ''"
-              (click)="sendImage()"
-            >
-              Guardar imagen
-            </button>
-          </div>
-        </div>
-        <div *ngIf="!uploadFileMode">
-          <button class="boton-cargar-imagen" mat-raised-button [color]="'primary'" (click)="cargarImagen()">
-            Cargar imagen
-          </button>
-        </div>
-        <app-loader class="inline-loader" [isLoading]="isLoading"></app-loader>
-        <mat-grid-list cols="2" rowHeight="1:1" gutterSize="10px">
-          <!-- <div fxLayout="row">
-            <mat-form-field class="input-buscar">
-              <mat-label class="input">Buscar</mat-label>
-              <input matInput [(ngModel)]="palabraPropiaBuscar" />
-            </mat-form-field>
-            <button mat-raised-button color="primary" (click)="buscarPropia(palabraPropiaBuscar)" class="boton-buscar">
-              <mat-icon>search</mat-icon>
-            </button>
-          </div> -->
-
-          <mat-card *ngFor="let im of imagenesPropias" class="card" (click)="seleccionarPicto(im)">
-            <img mat-card-image [src]="this.sanitizer.bypassSecurityTrustResourceUrl(im.src)" />
-            <mat-card-subtitle>{{ im.nombre }}</mat-card-subtitle>
-          </mat-card>
-        </mat-grid-list>
-      </mat-tab>
-    </mat-tab-group>
-  </div>
+  <div fxLayout="column" fxLayoutAlign="start start" fxFlex="50" fxFill></div>
 </div>

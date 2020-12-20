@@ -12,6 +12,7 @@ import { ImagenService } from '@app/services/imagenes-service';
 import { ActivatedRoute } from '@angular/router';
 import { Secuencia } from '@app/models/secuencias';
 import { DomSanitizer } from '@angular/platform-browser';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export interface Pictograma {
   nombre: string;
@@ -25,6 +26,9 @@ export interface Pictograma {
   styleUrls: ['./creador.component.scss']
 })
 export class CreadorComponent implements OnInit {
+  isLinear = true;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
   editMode: boolean;
   idSec: number;
 
@@ -53,7 +57,7 @@ export class CreadorComponent implements OnInit {
   imagenesPropias: any[] = [];
 
   private image: ImageSelected = null;
-
+  value = 'Clear me';
   imageSrc: any = '';
   nombreImagen: string;
   constructor(
@@ -64,10 +68,18 @@ export class CreadorComponent implements OnInit {
     public pictoService: PictoService,
     public imagenService: ImagenService,
     private activeRoute: ActivatedRoute,
-    public sanitizer: DomSanitizer
+    public sanitizer: DomSanitizer,
+    private _formBuilder: FormBuilder
   ) {}
 
   ngOnInit() {
+    this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required]
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      secondCtrl: ['', Validators.required]
+    });
+
     this.editMode = false;
     if (this.activeRoute.snapshot.params['id']) {
       this.idSec = this.activeRoute.snapshot.params['id'];

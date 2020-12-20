@@ -5,7 +5,7 @@
   display: flex;
   flex: 1;
   text-align: center;
-  padding: 10%;
+  padding-left: 1px;
   background-color: rgba(0, 0, 0, 0.705);
   background-image: url(https://c.pxhere.com/images/f1/26/d0feaf6584027138fdfa4fb8ce06-1417923.jpg!d);
   background-size: cover;
@@ -20,12 +20,16 @@
 }
 .title-card {
   background-color: rgb(17, 102, 71);
-  width: 80vw;
-  height: 25vmin;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 95%;
+  margin-bottom: 40px;
 }
 .mat-card-title {
   font-family: "Luckiest Guy", cursive;
-  font-size: 7vmin;
+  font-size: 50px;
   color: rgb(255, 255, 255);
 }
 
@@ -34,15 +38,6 @@
   width: 100%;
 }
 
-.login-fields > :not(:last-child) {
-  margin-bottom: 2vmin;
-}
-
 .login-error {
   color: mat-color($app-warn);
 }
-
-/* .mat-accent{
-  color: #000;
-}
- */

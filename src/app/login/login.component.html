@@ -1,18 +1,12 @@
-<div fxFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1.5rem" class="mat-typography">
+<div fxFill fxLayout="column" fxLayoutAlign="center center" class="mat-typography">
   <div fxLayoutAlign="center center">
-    <mat-card
-      class="title-card"
-      fxLayoutAlign="center center"
-      fxFlex="90%"
-      fxFlex.sm="66%"
-      fxFlex.md="50%"
-      fxFlex.gt-md="33%"
-    >
+    <mat-card class="title-card" fxLayoutAlign="center center">
       <mat-card-title class="mat-card-title">
         PictoTrainer
       </mat-card-title>
     </mat-card>
   </div>
+
   <div class="login-container" fxLayout="row" fxLayoutAlign="center">
     <mat-card fxFlex="90%" fxFlex.sm="66%" fxFlex.md="50%" fxFlex.gt-md="33%" class="login-box">
       <form (ngSubmit)="login()" [formGroup]="loginForm" novalidate>
@@ -52,7 +46,6 @@
           <button
             mat-raised-button
             color="primary"
-            style="font-size: 4vmin;"
             fxLayout="row"
             fxLayoutAlign="center center"
             type="submit"

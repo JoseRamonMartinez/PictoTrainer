@@ -1,161 +1,189 @@
 <div class="container mat-typography">
-  <div fxFill fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="1%">
-    <mat-card fxLayout="column" fxFill fxFlex="25" class="div-titulo mat-elevation-z2">
-      <div fxLayout="row">
-        <h1 class="titulo" style="font-size: 5vw;" fxFlex="80">MIS TAREAS</h1>
+  <mat-grid-list rowHeight="50px" cols="3">
+    <mat-grid-tile colspan="2">
+      <h1 class="titulo" colspan style="width: 100% !important;">MIS TAREAS</h1>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <button
+        mat-flat-button
+        style="position: absolute; right: 0;"
+        [color]="'success'"
+        class="boton-crear"
+        routerLink="/creador"
+        routerLinkActive="active"
+      >
+        &nbsp;CREAR
 
-        <button
-          style="height: 10vmin; width: 10vmin;"
-          mat-raised-button
-          [color]="'success'"
-          class="boton-crear"
-          routerLink="/creador"
-          routerLinkActive="active"
-          fxFlex="20"
+        <mat-icon>add_circle</mat-icon>
+      </button>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <div>
+    <mat-card class="div-titulo mat-elevation-z2">
+      <button
+        style="display:inline-flex;align-items: left;justify-content: left;vertical-align: left;"
+        mat-raised-button
+        *ngIf="!isPlayed"
+        color="warn"
+        class="boton"
+        (click)="ordenarNombreAsc()"
+      >
+        Nombre &#9660;
+      </button>
+
+      <button
+        style="display:inline-flex;align-items: left;justify-content: left;vertical-align: left;"
+        mat-raised-button
+        *ngIf="isPlayed"
+        color="accent"
+        class="boton"
+        (click)="ordenarNombreDesc()"
+      >
+        Nombre &#9650;
+      </button>
+
+      &nbsp;
+
+      <button
+        style="display:inline-flex;align-items: center;justify-content: center;vertical-align: middle;"
+        mat-raised-button
+        *ngIf="isPlayed1"
+        color="warn"
+        class="boton"
+        (click)="ordenarFecha()"
+      >
+        Fecha &#9660;
+      </button>
+
+      <button
+        style="display:inline-flex;align-items: center;justify-content: center;vertical-align: middle;"
+        mat-raised-button
+        *ngIf="!isPlayed1"
+        color="accent"
+        class="boton"
+        (click)="ordenarFecha()"
+      >
+        Fecha &#9650;
+      </button>
+
+      &nbsp;
+
+      <mat-form-field>
+        <mat-label>Filtrar por nombre</mat-label>
+        <input matInput [(ngModel)]="palabraBuscar" /> </mat-form-field
+      >&nbsp;&nbsp;
+
+      <button
+        style="display:inline-flex;align-items: center;justify-content: center;vertical-align: middle;"
+        mat-raised-button
+        color="accent"
+        (click)="buscar(palabraBuscar)"
+      >
+        <mat-icon style="display:inline-flex;align-items: center;justify-content: center;vertical-align: middle;"
+          >search</mat-icon
         >
-          <div style="font-size: 4vmin;" fxHide.lt-sm="true">
-            <mat-icon
-              style="font-size: 4.5vmin; display:inline-flex;align-items: center;justify-content: center;vertical-align: middle;"
-              >add_circle</mat-icon
-            >
-            &nbsp;CREAR
-          </div>
-          <div style="font-size: 4vmin;" fxHide.gt-xs="true">
-            <mat-icon style="font-size: 5vmin;">add_circle</mat-icon>
-          </div>
-        </button>
-      </div>
-      <div fxLayout.gt-xs="row" fxLayout.lt-sm="column">
-        <div fxLayout.gt-xs="row" fxLayout.lt-sm="column">
-          <div *ngIf="!isPlayed">
-            <button
-              style="height: 6vmin; ;width: 17vmin;font-size: 2.5vmin;display:inline-flex;align-items: center;justify-content: center;vertical-align: middle;"
-              mat-raised-button
-              *ngIf="!isPlayed"
-              color="warn"
-              class="boton"
-              (click)="ordenarNombreAsc()"
-            >
-              <p>Nombre &#9660;</p>
-            </button>
-          </div>
-          <div *ngIf="isPlayed">
-            <button
-              style="height: 6vmin; ;width: 17vmin;font-size: 2.5vmin;display:inline-flex;align-items: center;justify-content: center;vertical-align: middle;"
-              mat-raised-button
-              *ngIf="isPlayed"
-              color="accent"
-              class="boton"
-              (click)="ordenarNombreDesc()"
-            >
-              Nombre &#9650;
-            </button>
-          </div>
-
-          <div *ngIf="isPlayed1">
-            <button
-              style="height: 6vmin; ;width: 17vmin;font-size: 2.5vmin;display:inline-flex;align-items: center;justify-content: center;vertical-align: middle;"
-              mat-raised-button
-              *ngIf="isPlayed1"
-              color="warn"
-              class="boton"
-              (click)="ordenarFecha()"
-            >
-              Fecha &#9660;
-            </button>
-          </div>
-          <div *ngIf="!isPlayed1">
-            <button
-              style="height: 6vmin; ;width: 17vmin;font-size: 2.5vmin;display:inline-flex;align-items: center;justify-content: center;vertical-align: middle;"
-              mat-raised-button
-              *ngIf="!isPlayed1"
-              color="accent"
-              class="boton"
-              (click)="ordenarFecha()"
-            >
-              Fecha &#9650;
-            </button>
-          </div>
-
-          <div>
-            <mat-form-field style="width: 30vmin;padding-top: 1.25vmin;">
-              <mat-label>Filtrar por nombre</mat-label>
-              <input matInput [(ngModel)]="palabraBuscar" /> </mat-form-field
-            >&nbsp;&nbsp;
-
-            <button
-              style="height: 6vmin; ;width: 8vmin;font-size: 2.5vmin;display:inline-flex;align-items: center;justify-content: center;vertical-align: middle;"
-              mat-raised-button
-              color="accent"
-              (click)="buscar(palabraBuscar)"
-            >
-              <mat-icon
-                style="font-size: 5vmin;display:inline-flex;align-items: center;justify-content: center;vertical-align: middle;"
-                >search</mat-icon
-              >
-            </button>
-          </div>
-        </div>
-      </div>
+      </button>
     </mat-card>
 
     <app-loader class="inline-loader" [isLoading]="isLoading"></app-loader>
 
-    <div *ngFor="let sec of secuencias" fxLayout="row" fxLayout="column" fxFill fxFlex="50">
-      <mat-grid-list cols="2" rowHeight="2:1">
-        <mat-card class="card" fxFill fxLayout="row" fxFlex="85" fxLayoutGap="10px">
-          <div>
-            <div fxLayoutAlign="center center">
-              <h1 class="card-title">{{ sec.nombre | uppercase }}</h1>
-            </div>
-            <div class="acciones" fxLayout="row" fxLayoutAlign="end center" *ngFor="let acc of sec.acciones" fxFlex>
-              <mat-card class="icon-card" (click)="ampliarPicto(acc)">
-                <img mat-card-image src="{{ acc.src }}" class="icon-imagen" />
-                <mat-card-subtitle class="card-text">{{ acc.nombre }}</mat-card-subtitle>
-                <img />
-              </mat-card>
-              <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <mat-icon *ngIf="calcularFlecha(sec, acc)">double_arrow</mat-icon>
-            </div>
-            <div fxLayout="column" fxFill fxLayoutAlign="center center" fxFlex="500%">
+    <div style="padding-top: 1%;" *ngFor="let sec of secuencias">
+      <mat-accordion>
+        <mat-expansion-panel hideToggle class="card">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <div>
+                <h1 class="card-title">{{ sec.nombre | uppercase }}</h1>
+              </div>
+            </mat-panel-title>
+            <mat-panel-description>
               <button
-                mat-raised-button
-                color="primary"
-                class="boton"
-                [routerLink]="['/creador', sec.idsecuencia]"
+                mat-fab
+                [color]="'success'"
+                class="boton-play"
+                [routerLink]="['/play', sec.idsecuencia]"
                 routerLinkActive="active"
-                style="font-size: 3vmin;"
+                style="position: absolute; right: 5%; width: 40px;
+            height: 40px; margin-top: 4px;"
               >
-                Editar
+                <mat-icon style=" font-size: 23px;" [inline]="true">
+                  play_arrow
+                </mat-icon>
               </button>
-              <button
-                class="boton"
-                style="font-size: 3vmin;"
-                mat-raised-button
-                color="warn"
-                class="boton"
-                (click)="borrarSecuencia(sec)"
-              >
-                Borrar
-              </button>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <mat-grid-list cols="2" rowHeight="2:1">
+            <div>
+              <div class="acciones" fxLayout="row" *ngFor="let acc of sec.acciones">
+                <mat-card class="icon-card" (click)="ampliarPicto(acc)">
+                  <img style="    max-width:128px;" mat-card-image src="{{ acc.src }}" />
+
+                  <img />
+                  <mat-card-subtitle class="card-text">{{ acc.nombre }}</mat-card-subtitle>
+                </mat-card>
+                <div style="margin: auto;">
+                  <mat-icon *ngIf="calcularFlecha(sec, acc)">double_arrow</mat-icon>
+                </div>
+              </div>
+
+              <div fxLayout="column" fxFill fxLayoutAlign="center center" fxFlex="4%">
+                <button
+                  mat-raised-button
+                  color="primary"
+                  class="boton"
+                  [routerLink]="['/creador', sec.idsecuencia]"
+                  routerLinkActive="active"
+                  style="display:inline-flex;align-items: center;justify-content: center;vertical-align: middle;z-index: 10;  
+
+                right: 5px;  
+                top: 60%;
+                margin-bottom: 12px;
+                "
+                >
+                  Editar
+                </button>
+
+                <button
+                  class="boton"
+                  mat-raised-button
+                  color="warn"
+                  class="boton"
+                  (click)="borrarSecuencia(sec)"
+                  style="display:inline-flex;align-items: center;justify-content: center;vertical-align: middle;z-index: 10;  
+                 
+                right: 5px;  
+                top: 30%;
+                "
+                >
+                  Borrar
+                </button>
+              </div>
             </div>
-          </div>
-        </mat-card>
-        <div fxLayout="row" fxLayoutAlign="start center" style="font-size: 9vmin;">
+
+            <!-- <div fxLayout="row" fxLayoutAlign="start center" >
           <button
             mat-fab
             [color]="'success'"
             class="boton-play"
             [routerLink]="['/play', sec.idsecuencia]"
             routerLinkActive="active"
-            style="height: 13vmin; ;width: 13vmin;font-size: 8vmin;display:inline-flex;align-items: center;justify-content: center;vertical-align: middle;"
+            style="display:inline-flex;align-items: center;justify-content: center;vertical-align: middle;z-index: 10;  
+            position: absolute;  
+            right: 5px;  
+            top: 45%;
+            "
+          
           >
-            <mat-icon [inline]="true">
+            <mat-icon style=" font-size: 40px;" [inline]="true">
               play_arrow
             </mat-icon>
           </button>
-        </div>
-      </mat-grid-list>
+        </div>-->
+          </mat-grid-list>
+        </mat-expansion-panel>
+      </mat-accordion>
     </div>
   </div>
 </div>

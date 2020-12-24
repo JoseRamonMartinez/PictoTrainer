@@ -283,12 +283,19 @@ router.delete('/acciones/:id', function(req, res, next) {
 
 router.get('/picto/:nombre', function(req, res) {
   request('https://api.arasaac.org/api/pictograms/es/bestsearch/' + req.params.nombre, function(error, response, body) {
-    var pictoId = JSON.parse(body)[0]._id;
+    if (body.length == 2) {
+      res.send({
+        nombre: 'Not found',
+        src: 'https://api.arasaac.org/api/pictograms/29639?download=false'
+      });
+    } else {
+      var pictoId = JSON.parse(body)[0]._id;
 
-    res.send({
-      nombre: req.params.nombre,
-      src: 'https://api.arasaac.org/api/pictograms/' + pictoId + '?download=false'
-    });
+      res.send({
+        nombre: req.params.nombre,
+        src: 'https://api.arasaac.org/api/pictograms/' + pictoId + '?download=false'
+      });
+    }
 
     /*var cadena1 = body.slice(22, -16);
     console.log(cadena1);*/
